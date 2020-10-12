@@ -126,15 +126,13 @@ def preprocess_facescrub(dirpath):
                 task_bboxes.append(bboxes[i])
                 task_genders.append(genders[i])
             else:
-                tasks.append(
-                    (data_dir, task_genders, task_names, task_urls, task_bboxes))
+                tasks.append((data_dir, task_genders, task_names, task_urls, task_bboxes))
                 task_names = [names[i]]
                 task_urls = [urls[i]]
                 task_bboxes = [bboxes[i]]
                 task_genders = [genders[i]]
                 last_name = names[i]
-        tasks.append(
-            (data_dir, task_genders, task_names, task_urls, task_bboxes))
+        tasks.append((data_dir, task_genders, task_names, task_urls, task_bboxes))
 
         pool_size = multiprocessing.cpu_count()
         pool = multiprocessing.Pool(processes=pool_size, maxtasksperchild=2)
@@ -143,7 +141,7 @@ def preprocess_facescrub(dirpath):
         pool.join()
 
 
-def download_facescrub((data_dir, genders, names, urls, bboxes)):
+def download_facescrub(data_dir, genders, names, urls, bboxes):
     """
         download from urls into folder names using wget
     """

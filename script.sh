@@ -7,10 +7,10 @@
 #python ./discogan/image_translation.py --task_name='celebA' --style_A='Blond_Hair' --style_B='Black_Hair' --constraint='Male' --constraint_type='-1' --batch_size=500
 
 # Run CelebA (male to female)
-python ./discogan/image_translation.py --task_name='celebA' --style_A='Male' --batch_size=500
+# python ./discogan/image_translation.py --task_name='celebA' --style_A='Male' --batch_size=500
 
 # Run Edges2Handbags
-# python ./discogan/image_translation.py --task_name='edges2handbags' --batch_size=500
+python ./discogan/image_translation.py --task_name='edges2handbags' --batch_size=10 --cuda=False
 
 # Run Edges2Shoes
 # python ./discogan/image_translation.py --task_name='edges2shoes' --batch_size=500
