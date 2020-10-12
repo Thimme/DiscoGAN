@@ -4,7 +4,6 @@ from itertools import chain
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.autograd import Variable
 import scipy
 from PIL import Image
 from tqdm import tqdm
@@ -67,7 +66,7 @@ def get_fm_loss(real_feats, fake_feats, criterion, cuda):
     losses = 0
     for real_feat, fake_feat in zip(real_feats, fake_feats):
         l2 = (real_feat.mean(0) - fake_feat.mean(0)) * (real_feat.mean(0) - fake_feat.mean(0))
-        loss = criterion(l2, Variable(torch.ones(l2.size())))
+        loss = criterion(l2, torch.ones(l2.size()))
         if cuda:
             loss.cuda()
         losses += loss
@@ -77,9 +76,9 @@ def get_fm_loss(real_feats, fake_feats, criterion, cuda):
 
 def get_gan_loss(dis_real, dis_fake, criterion, cuda):
     # create labels for discriminator and generator
-    labels_dis_real = Variable(torch.ones(dis_real.size()))
-    labels_dis_fake = Variable(torch.zeros(dis_fake.size()))
-    labels_gen = Variable(torch.ones(dis_fake.size()))
+    labels_dis_real = torch.ones(dis_real.size())
+    labels_dis_fake = torch.zeros(dis_fake.size())
+    labels_gen = torch.ones(dis_fake.size())
 
     if cuda:
         labels_dis_real = labels_dis_real.cuda()
@@ -123,8 +122,8 @@ def main():
     test_A = read_images(test_style_A, None, args.image_size)
     test_B = read_images(test_style_B, None, args.image_size)
 
-    test_A = torch.tensor(test_A, requires_grad=True)
-    test_B = torch.tensor(test_B, requires_grad=True)
+    test_A = torch.tensor(test_A)
+    test_B = torch.tensor(test_B)
 
     if not os.path.exists(result_path):
         os.makedirs(result_path)
@@ -177,8 +176,8 @@ def main():
             A = read_images(A_path, None, args.image_size)
             B = read_images(B_path, None, args.image_size)
 
-            A = Variable(torch.FloatTensor(A))
-            B = Variable(torch.FloatTensor(B))
+            A = torch.from_numpy(A)
+            B = torch.from_numpy(B)
 
             if cuda:
                 A = A.cuda()
@@ -190,7 +189,7 @@ def main():
             ABA = generator_A(AB)
             BAB = generator_B(BA)
 
-            # Reconstruction Loss
+            # Reconstruction Loss:wq
             recon_loss_A = recon_criterion(ABA, A)
             recon_loss_B = recon_criterion(BAB, B)
 

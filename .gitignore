@@ -1,5 +1,6 @@
 models/*
 results/*
+datasets/normal2fog/*
 *.gz
 *.pyc
 
