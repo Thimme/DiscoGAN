@@ -10,7 +10,7 @@
 # python ./discogan/image_translation.py --task_name='celebA' --style_A='Male' --batch_size=500
 
 # Run Edges2Handbags
-python ./discogan/image_translation.py --task_name='edges2handbags' --batch_size=10 --cuda=False
+python ./discogan/image_translation.py --task_name='edges2handbags' --batch_size=10
 
 # Run Edges2Shoes
 # python ./discogan/image_translation.py --task_name='edges2shoes' --batch_size=500

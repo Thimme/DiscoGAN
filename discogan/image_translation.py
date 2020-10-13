@@ -67,8 +67,6 @@ def get_fm_loss(real_feats, fake_feats, criterion, cuda):
     for real_feat, fake_feat in zip(real_feats, fake_feats):
         l2 = (real_feat.mean(0) - fake_feat.mean(0)) * (real_feat.mean(0) - fake_feat.mean(0))
         loss = criterion(l2, torch.ones(l2.size()))
-        if cuda:
-            loss.cuda()
         losses += loss
 
     return losses
