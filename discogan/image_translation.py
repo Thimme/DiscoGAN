@@ -268,12 +268,12 @@ def main():
                     BAB_val = BAB[im_idx].cpu().data.numpy().transpose(1, 2, 0) * 255.
 
                     filename_prefix = os.path.join(subdir_path, str(im_idx))
-                    save_image(filename_prefix, 'A.jpg', A_val)
-                    save_image(filename_prefix, 'B.jpg', B_val)
-                    save_image(filename_prefix, 'BA.jpg', BA_val)
+                    # save_image(filename_prefix, 'A.jpg', A_val)
+                    # save_image(filename_prefix, 'B.jpg', B_val)
+                    # save_image(filename_prefix, 'BA.jpg', BA_val)
                     save_image(filename_prefix, 'AB.jpg', AB_val)
-                    save_image(filename_prefix, 'ABA.jpg', ABA_val)
-                    save_image(filename_prefix, 'BAB.jpg', BAB_val)
+                    # save_image(filename_prefix, 'ABA.jpg', ABA_val)
+                    # save_image(filename_prefix, 'BAB.jpg', BAB_val)
 
             if iters % args.model_save_interval == 0:
                 torch.save(generator_A,
